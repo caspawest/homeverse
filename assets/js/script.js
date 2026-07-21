@@ -4,7 +4,10 @@
  * element toggle function
  */
 
-const elemToggleFunc = function (elem) { elem.classList.toggle("active"); }
+const elemToggleFunc = function (elem) {
+  if (!elem) return;
+  elem.classList.toggle("active");
+}
 
 
 
@@ -31,7 +34,10 @@ for (let i = 0; i < navbarLinks.length; i++) { navElemArr.push(navbarLinks[i]); 
  */
 
 for (let i = 0; i < navElemArr.length; i++) {
-  navElemArr[i].addEventListener("click", function () {
+  const navElem = navElemArr[i];
+  if (!navElem) continue;
+
+  navElem.addEventListener("click", function () {
     elemToggleFunc(navbar);
     elemToggleFunc(overlay);
   });
@@ -45,7 +51,9 @@ for (let i = 0; i < navElemArr.length; i++) {
 
 const header = document.querySelector("[data-header]");
 
-window.addEventListener("scroll", function () {
-  window.scrollY >= 400 ? header.classList.add("active")
-    : header.classList.remove("active");
-}); 
+if (header) {
+  window.addEventListener("scroll", function () {
+    window.scrollY >= 400 ? header.classList.add("active")
+      : header.classList.remove("active");
+  });
+}

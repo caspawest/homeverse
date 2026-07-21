@@ -1644,3 +1644,110 @@ button, a { transition: var(--transition); }
   .footer-link-box { flex-basis: 700px; }
 
 }
+
+
+
+/*-----------------------------------*\
+  #DARK THEME
+\*-----------------------------------*/
+
+/**
+ * A stylish dark theme. Implemented by remapping the light palette tokens to
+ * dark surfaces / light text, plus a few targeted surface overrides for tokens
+ * (--white) that the base styles use for both backgrounds and on-accent text.
+ */
+
+:root {
+
+  /**
+   * new dark surfaces
+   */
+
+  --bg-body: hsl(224, 26%, 7%);
+  --surface-1: hsl(222, 20%, 12%);
+  --surface-2: hsl(222, 18%, 16%);
+  --hairline: hsla(0, 0%, 100%, 0.08);
+
+  /**
+   * text tokens -> light
+   */
+
+  --dark-jungle-green: hsl(210, 20%, 96%);
+  --cadet: hsl(214, 15%, 72%);
+  --opal: hsl(185, 18%, 62%);
+
+  /**
+   * light-surface tokens -> dark
+   */
+
+  --cultured-1: hsl(220, 13%, 22%);
+  --cultured-2: hsl(222, 18%, 11%);
+  --alice-blue: hsl(220, 13%, 26%);
+  --misty-rose: hsl(222, 18%, 16%);
+  --seashell: hsl(222, 18%, 16%);
+
+  /**
+   * already-dark sections -> deeper, cohesive tones
+   */
+
+  --prussian-blue: hsl(222, 30%, 10%);
+  --raisin-black-1: hsl(224, 26%, 9%);
+  --raisin-black-2: hsl(226, 30%, 6%);
+
+  /**
+   * shadows tuned for a dark canvas
+   */
+
+  --shadow-1: 0 5px 20px 0 hsla(0, 0%, 0%, 0.45);
+  --shadow-2: 0 16px 32px hsla(0, 0%, 0%, 0.5);
+
+}
+
+body { background: var(--bg-body); }
+
+::-webkit-scrollbar-track { background: var(--bg-body); }
+
+::-webkit-scrollbar-thumb { border-left: 2px solid var(--bg-body); }
+
+/**
+ * surfaces that use --white as a background (kept as light text elsewhere)
+ */
+
+.header-bottom,
+.navbar,
+.header-bottom-actions,
+.header-bottom-actions-btn,
+.service-card,
+.features-card,
+.features-card .card-btn {
+  background: var(--surface-1);
+}
+
+/* dark round nav icon on desktop needs a light glyph */
+.header-bottom-actions-btn ion-icon { color: var(--cadet); }
+
+/* property / blog cards have no explicit background: give them a surface */
+.property-card,
+.blog-card {
+  background: var(--surface-1);
+}
+
+.property-card .card-content { border-bottom-color: var(--hairline); }
+
+.property-card .card-item:not(:last-child) {
+  border-right-color: hsla(0, 0%, 100%, 0.16);
+}
+
+/* button hover: the sliding shine + swapped colors must stay readable on dark */
+.btn::before { background: var(--surface-1); }
+
+.btn:is(:hover, :focus) {
+  background: var(--surface-1);
+  color: var(--white);
+  border-color: var(--surface-1);
+}
+
+/* CTA split background: top half was pure white */
+.cta {
+  background: linear-gradient(to bottom, var(--bg-body) 50%, var(--raisin-black-1) 50%);
+}
